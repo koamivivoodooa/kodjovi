@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Kodjovi KAVEGUE | Mannequin Professional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* ===== MENU FIXE ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+        .navbar a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
+        .navbar a:hover, .navbar a.active {
+            color: #D4AF37;
+            border-bottom: 2px solid #D4AF37;
+        }
+        /* Ajustement pour ne pas cacher le contenu sous le menu fixe */
+        .hero {
+            margin-top: 0;
+            scroll-margin-top: 70px;
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* animations wow */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 100%), url('hero-bg.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #D4AF37;
+            margin: 15px 0;
+        }
+
+        .hero .titles {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: #ddd;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: #D4AF37;
+            color: #0a0a0a;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            background: #c5a028;
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(212,175,55,0.4);
+        }
+
+        /* sections */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #D4AF37;
+        }
+
+        .section-sub {
+            text-align: center;
+            font-size: 1rem;
+            color: #aaa;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* bio */
+        .bio-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bio-text {
+            flex: 2;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            font-weight: 300;
+        }
+
+        .bio-text strong {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+
+        .bio-signature {
+            margin-top: 25px;
+            font-style: italic;
+            border-left: 3px solid #D4AF37;
+            padding-left: 20px;
+        }
+
+        .bio-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .bio-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+            transition: transform 0.4s;
+        }
+
+        .bio-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* mensurations */
+        .measurements {
+            background: #111;
+            border-radius: 30px;
+            padding: 40px 30px;
+            margin-top: 20px;
+        }
+        .measurements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .measure-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #2a2a2a;
+        }
+        .measure-card:hover {
+            border-color: #D4AF37;
+            transform: translateY(-5px);
+        }
+        .measure-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #D4AF37;
+            font-weight: 600;
+        }
+        .measure-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 10px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        .measure-unit {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        /* galerie */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #1a1a1a;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s;
+            display: block;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -10px rgba(0,0,0,0.5);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        /* événements */
+        .events-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .event-badge {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+            color: #D4AF37;
+        }
+
+        .event-badge:hover {
+            background: #D4AF37;
+            color: #0a0a0a;
+            transform: scale(1.05);
+            border-color: transparent;
+        }
+
+        /* lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* contact */
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: #111;
+            border-radius: 30px;
+            padding: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #D4AF37;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .info-item i {
+            width: 40px;
+            height: 40px;
+            background: #D4AF37;
+            color: #0a0a0a;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .info-item a {
+            color: #f0f0f0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .info-item a:hover {
+            color: #D4AF37;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.2s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+
+        .contact-form button {
+            background: #D4AF37;
+            color: #0a0a0a;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .contact-form button:hover {
+            background: #c5a028;
+        }
+
+        /* footer */
+        footer {
+            background: #050505;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #222;
+        }
+
+        .social-links a {
+            color: #D4AF37;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            color: white;
+        }
+
+        footer p {
+            margin-top: 25px;
+            font-size: 0.9rem; /* légèrement augmenté */
+            color: #bbb;
+        }
+
+        .footer-signature {
+            font-size: 0.85rem;
+            color: #D4AF37;
+            letter-spacing: 1px;
+        }
+
+        /* bouton retour haut */
+        .go-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #D4AF37;
+            color: #0a0a0a;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 99;
+            border: none;
+        }
+        .go-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .go-top:hover {
+            background: #c5a028;
+            transform: translateY(-3px);
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .contact-wrapper { padding: 25px; }
+            .bio-text { font-size: 1rem; }
+            .gallery-grid { gap: 15px; }
+            .gallery-item img { height: 280px; }
+            .event-badge { font-size: 0.8rem; padding: 8px 16px; }
+            .measure-value { font-size: 1.4rem; }
+            .navbar { gap: 15px; padding: 10px 15px; }
+            .navbar a { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu fixe -->
+<div class="navbar">
+    <a href="#home" class="active">Accueil</a>
+    <a href="#about">Bio</a>
+    <a href="#measurements">Mensurations</a>
+    <a href="#gallery">Galerie</a>
+    <a href="#events">Runway</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<!-- Hero section -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Kodjovi KAVEGUE</h1>
+        <div class="tagline">Une présence athlétique alliée à une élégance naturelle</div>
+        <div class="titles">Mannequin Professional • Athlète d'élégance</div>
+        <a href="#contact" class="btn-gold">Collaborons <i class="fas fa-arrow-right"></i></a>
+    </div>
+</section>
+
+<!-- Bio section -->
+<section class="section" id="about">
+    <h2 class="section-title fade-up">Bio</h2>
+    <div class="bio-container fade-up">
+        <div class="bio-text">
+            <p>Kodjovi KAVEGUE incarne avec aisance l’équilibre entre la rigueur de la haute couture et l’impact du mannequinat commercial. Déjà aguerri aux scènes internationales, il a imposé son charisme sur les podiums du <strong>Togo, du Bénin, du Ghana et du Nigeria</strong>.</p>
+            <p>Bilingue et résolument tourné vers l'excellence, il apporte une énergie solaire et un professionnalisme absolu à chaque vision créative.</p>
+            <div class="bio-signature">
+                <i class="fas fa-star-of-life" style="color:#D4AF37;"></i>  Disponible pour défilés, campagnes, shooting éditorial et brand content.
+            </div>
+        </div>
+        <div class="bio-image">
+            <img src="portrait.jpg" alt="Kodjovi KAVEGUE portrait">
+        </div>
+    </div>
+</section>
+
+<!-- Mensurations -->
+<section class="section" id="measurements">
+    <h2 class="section-title fade-up">Mensurations / Measurements</h2>
+    <div class="measurements fade-up">
+        <div class="measurements-grid">
+            <div class="measure-card"><div class="measure-label">Hauteur | Height</div><div class="measure-value">1.88 m</div><div class="measure-unit">6’2”</div></div>
+            <div class="measure-card"><div class="measure-label">Épaules | Shoulders</div><div class="measure-value">46 cm</div><div class="measure-unit">18.1 in</div></div>
+            <div class="measure-card"><div class="measure-label">Poitrine | Chest</div><div class="measure-value">90 cm</div><div class="measure-unit">35.4 in</div></div>
+            <div class="measure-card"><div class="measure-label">Taille | Waist</div><div class="measure-value">72 cm</div><div class="measure-unit">28.3 in</div></div>
+            <div class="measure-card"><div class="measure-label">Hanches | Hips</div><div class="measure-value">88 cm</div><div class="measure-unit">34.6 in</div></div>
+            <div class="measure-card"><div class="measure-label">Poids | Weight</div><div class="measure-value">68 kg</div><div class="measure-unit">150 lbs</div></div>
+            <div class="measure-card"><div class="measure-label">Yeux | Eyes</div><div class="measure-value">Marron</div><div class="measure-unit">Brown</div></div>
+            <div class="measure-card"><div class="measure-label">Cheveux | Hair</div><div class="measure-value">Noirs</div><div class="measure-unit">Black</div></div>
+            <div class="measure-card"><div class="measure-label">Pointure | Shoes</div><div class="measure-value">44 EU</div><div class="measure-unit">11 US</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Galerie -->
+<section class="section" id="gallery">
+    <h2 class="section-title fade-up">Portfolio</h2>
+    <div class="section-sub fade-up">Élégance, puissance et charisme en mouvement</div>
+    <div class="gallery-grid fade-up" id="galleryGrid">
+        <div class="gallery-item"><img src="gallery-1.jpg" alt="Podium"></div>
+        <div class="gallery-item"><img src="gallery-2.jpg" alt="Séance photo"></div>
+        <div class="gallery-item"><img src="gallery-3.jpg" alt="Editorial"></div>
+        <div class="gallery-item"><img src="gallery-4.jpg" alt="Athlétique"></div>
+        <div class="gallery-item"><img src="gallery-5.jpg" alt="Mode"></div>
+        <div class="gallery-item"><img src="gallery-6.jpg" alt="Défilé"></div>
+    </div>
+</section>
+
+<!-- Événements (ordre : Togo, Ghana, Bénin, puis Nigeria en dernier) -->
+<section class="section" id="events">
+    <h2 class="section-title fade-up">Runway Moments</h2>
+    <div class="section-sub fade-up">Scènes internationales qui ont marqué son parcours</div>
+    <div class="events-container fade-up">
+        <div class="event-badge">🇹🇬 FIMO228 (Togo)</div>
+        <div class="event-badge">🇬🇭 Kumasi Fashion Week (Ghana)</div>
+        <div class="event-badge">🇬🇭 Global Fashion Week (Ghana)</div>
+        <div class="event-badge">🇬🇭 Ghana Menswear Week (Ghana)</div>
+        <div class="event-badge">🇧🇯 Mois de la Mode (Bénin)</div>
+        <div class="event-badge">🇧🇯 Benin Fashion Week (Bénin)</div>
+        <!-- Nigeria en dernière position -->
+        <div class="event-badge">🇳🇬 Music Fashion Runway (Nigeria)</div>
+        <div class="event-badge">🇳🇬 The African Print Party (Nigeria)</div>
+        <div class="event-badge">✨ et bien d'autres...</div>
+    </div>
+</section>
+
+<!-- Contact section -->
+<section class="section" id="contact">
+    <h2 class="section-title fade-up">Contact & Booking</h2>
+    <div class="contact-wrapper fade-up">
+        <div class="contact-info">
+            <h3><i class="fas fa-crown"></i> Prenons contact</h3>
+            <!-- Un seul numéro : le 79 -->
+            <div class="info-item">
+                <i class="fas fa-phone-alt"></i>
+                <div><a href="tel:+22879790933">+228 79 79 09 33</a></div>
+            </div>
+            <div class="info-item">
+                <i class="fab fa-whatsapp"></i>
+                <div><a href="https://wa.me/22879790933" target="_blank">WhatsApp : +228 79 79 09 33</a></div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <div><a href="mailto:kaveguekodjovi08@gmail.com">kaveguekodjovi08@gmail.com</a></div>
+            </div>
+            <div class="info-item">
+                <i class="fab fa-instagram"></i>
+                <div><a href="https://instagram.com/kodjovikavegue" target="_blank">@kodjovikavegue</a></div>
+            </div>
+        </div>
+        <div class="contact-form">
+            <form id="contactForm">
+                <input type="text" placeholder="Nom complet" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Téléphone">
+                <textarea rows="4" placeholder="Votre message (projet, date, budget...)"></textarea>
+                <button type="submit">Envoyer la demande <i class="fas fa-paper-plane"></i></button>
+            </form>
+            <p style="font-size: 0.7rem; margin-top: 12px; color:#888;">Formulaire de démonstration – les messages seront reçus par email.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="social-links">
+        <a href="https://wa.me/22879790933" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/kodjovikavegue" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:kaveguekodjovi08@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+22879790933"><i class="fas fa-phone-alt"></i></a>
+    </div>
+    <p>© 2025 Kodjovi KAVEGUE – Mannequin Professional</p>
+    <p style="font-size: 0.85rem; color: #888;">Powered by OAII | +228 90 47 87 73</p>
+</footer>
+
+<!-- Bouton retour en haut -->
+<div class="go-top" id="goTop">
+    <i class="fas fa-chevron-up"></i>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+    <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+    // Animation wow au scroll
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    fadeElements.forEach(el => observer.observe(el));
+
+    // Lightbox
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    galleryItems.forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            lightbox.classList.add('active');
+            lightboxImg.src = img.src;
+        });
+    });
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+        }
+    });
+
+    // Formulaire
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Merci pour votre message. Kodjovi vous répondra dans les meilleurs délais.');
+        form.reset();
+    });
+
+    // Menu actif au scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.navbar a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Bouton retour haut
+    const goTopBtn = document.getElementById('goTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            goTopBtn.classList.add('show');
+        } else {
+            goTopBtn.classList.remove('show');
+        }
+    });
+    goTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>
