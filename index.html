@@ -1425,6 +1425,7 @@
             <div class="contact-form">
                 <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="subject" id="dynamicSubject" data-remove-prefix value="Demande de booking - " />
                     
                     <!-- Champ honeypot anti-spam (caché) -->
                     <p style="display:none">
@@ -1723,6 +1724,25 @@
             else goTopBtn.classList.remove('show');
         }, { passive: true });
         goTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
+
+    <script>
+        // Personnalise l'objet de l'email avec le nom de l'expéditeur
+        (function() {
+            const nameField = document.querySelector('input[name="name"]');
+            const subjectField = document.getElementById('dynamicSubject');
+            
+            if (nameField && subjectField) {
+                nameField.addEventListener('input', function() {
+                    const name = this.value.trim();
+                    if (name !== '') {
+                        subjectField.value = `Demande de booking - ${name}`;
+                    } else {
+                        subjectField.value = 'Demande de booking - (nom non renseigné)';
+                    }
+                });
+            }
+        })();
     </script>
 </body>
 </html>
