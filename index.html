@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Kodjovi KAVEGUE | Mannequin Professional</title>
-    <meta name="description" content="Kodjovi KAVEGUE, mannequin international basé au Togo, Bénin, Ghana et Nigeria. Présence athlétique, élégance naturelle. Contact pour réservations.">
+    <title>Kodjovi KAVEGUE | Mannequin Professionnel</title>
+    <meta name="description" content="Kodjovi KAVEGUE, mannequin international basé au Togo, Bénin, Ghana et Nigeria. Presence athletique, elegance naturelle. Contact pour réservations.">
     <meta property="og:title" content="Kodjovi KAVEGUE | Mannequin Professional">
     <meta property="og:description" content="Mannequin international, présence athlétique. Contact pour réservations.">
     <meta property="og:image" content="portrait.jpg">
@@ -13,8 +13,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- MODIF : Préchargement de l'image de fond pour éviter qu'elle arrive après l'animation -->
-    <link rel="preload" as="image" href="hero-bg.jpg">
+    <link rel="preload" as="image" href="hero-bg.jpg"> <!-- utile pour prioriser l'image de fond -->
     <style>
         * {
             margin: 0;
@@ -248,7 +247,7 @@
             }
         }
 
-        /* ===== HERO SANS MOUVEMENT DU FOND ===== */
+        /* ===== HERO (ANIMATION D'APPARITION CORRIGÉE) ===== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -259,6 +258,7 @@
             padding: 0 20px;
             position: relative;
             overflow: hidden;
+            background-color: #0a0a0a; /* fond de secours si l'image ne charge pas */
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 100%), url('hero-bg.jpg') center/cover no-repeat;
             background-attachment: scroll;
         }
@@ -286,7 +286,6 @@
                 radial-gradient(1px 1px at 90% 15%, #D4AF37, transparent),
                 radial-gradient(2px 2px at 15% 45%, #D4AF37, transparent);
             animation: sparkleDrift 18s linear infinite;
-            animation-delay: 2s; /* MODIF : laisse la priorité à l'animation d'apparition */
         }
         @keyframes sparkleDrift {
             0% {
@@ -320,7 +319,6 @@
             z-index: 1;
             background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
             animation: vignetteBreath 6s ease-in-out infinite;
-            animation-delay: 2s; /* MODIF : laisse la priorité à l'animation d'apparition */
         }
         @keyframes vignetteBreath {
             0%,
@@ -346,8 +344,6 @@
             display: block;
             opacity: 0;
             animation-fill-mode: forwards;
-            will-change: transform, opacity; /* MODIF : passage sur le GPU */
-            transform: translateZ(0);         /* MODIF : force la création d'un calque GPU */
         }
         .hero-line:last-child {
             margin-top: -0.12em;
@@ -358,7 +354,7 @@
         .hero-line:last-child {
             animation: heroRevealLine 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
         }
-        /* MODIF : nouvelle keyframe sans clip-path ni blur, bien plus performante */
+        /* SEULE MODIFICATION : keyframe sans clip-path ni blur, beaucoup plus fluide */
         @keyframes heroRevealLine {
             from {
                 opacity: 0;
@@ -380,8 +376,6 @@
             z-index: 2;
             animation: fadeSlideUp 1.2s ease 0.8s forwards;
             opacity: 0;
-            will-change: transform, opacity; /* MODIF */
-            transform: translateZ(0);         /* MODIF */
         }
         .subtitle-white {
             font-family: 'Montserrat', sans-serif;
@@ -393,8 +387,6 @@
             z-index: 2;
             animation: fadeSlideUp 1.2s ease 0.95s forwards;
             opacity: 0;
-            will-change: transform, opacity; /* MODIF */
-            transform: translateZ(0);         /* MODIF */
         }
         @keyframes fadeSlideUp {
             from {
@@ -419,8 +411,6 @@
             animation: goldShimmer 3s ease-in-out infinite, expandLine 1s ease 1.1s forwards;
             transform: scaleX(0);
             border-radius: 2px;
-            will-change: transform; /* MODIF */
-            transform: translateZ(0) scaleX(0); /* MODIF : on garde le scaleX initial mais on ajoute translateZ(0) */
         }
         @keyframes goldShimmer {
             0%,
@@ -433,7 +423,7 @@
         }
         @keyframes expandLine {
             to {
-                transform: scaleX(1); /* l'animation remplacera le transform, mais translateZ(0) reste via le calque */
+                transform: scaleX(1);
             }
         }
 
@@ -455,8 +445,6 @@
             animation: fadeSlideUp 1.2s ease 1.3s forwards, btnGlow 3s ease-in-out 2.5s infinite;
             opacity: 0;
             position: relative;
-            will-change: transform, opacity; /* MODIF */
-            transform: translateZ(0);         /* MODIF */
         }
         @keyframes btnGlow {
             0%,
@@ -1306,7 +1294,7 @@
             <span class="hero-line">Kodjovi</span>
             <span class="hero-line">KAVEGUE</span>
         </h1>
-        <p class="subtitle">PRÉSENCE ATHLÉTIQUE & ÉLÉGANCE NATURELLE</p>
+        <p class="subtitle">PRESENCE ATHLETIQUE & ELEGANCE NATURELLE</p>
         <p class="subtitle-white">Mannequin Professionnel • Athlète d'élégance</p>
         <div class="gold-line"></div>
         <a href="#contact" class="btn-gold">Collaborer <i class="fas fa-arrow-right"></i></a>
@@ -1464,8 +1452,8 @@
         <div class="footer-grid">
             <div class="footer-col brand-col">
                 <h3 class="footer-logo">Kodjovi KAVEGUE</h3>
-                <p class="footer-tagline">Mannequin International • Présence Athlétique</p>
-                <p class="footer-copyright">© 2025 Kodjovi KAVEGUE. Tous droits réservés.</p>
+                <p class="footer-tagline">Mannequin International basé au Togo</p>
+                <p class="footer-copyright">Copyright © 2026 Kodjovi KAVEGUE.</p>
             </div>
             <div class="footer-col social-col"></div>
             <div class="footer-col">
