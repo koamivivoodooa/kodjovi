@@ -1423,15 +1423,26 @@
                 <div class="info-item"><i class="fab fa-instagram"></i><div><a href="https://instagram.com/kodjovikavegue" target="_blank">@kodjovikavegue</a></div></div>
             </div>
             <div class="contact-form">
-                <form id="contactForm">
+                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact" />
+                    
+                    <!-- Champ honeypot anti-spam (caché) -->
+                    <p style="display:none">
+                        <label>Ne remplis pas ce champ : <input name="bot-field" /></label>
+                    </p>
+                    
                     <label for="name" class="sr-only">Nom complet</label>
                     <input type="text" id="name" name="name" placeholder="Nom complet" required>
+                    
                     <label for="email" class="sr-only">Email</label>
                     <input type="email" id="email" name="email" placeholder="Email" required>
+                    
                     <label for="phone" class="sr-only">Téléphone</label>
                     <input type="tel" id="phone" name="phone" placeholder="Téléphone">
+                    
                     <label for="message" class="sr-only">Message</label>
                     <textarea id="message" name="message" rows="4" placeholder="Votre message (projet, date, budget...)"></textarea>
+                    
                     <button type="submit">Envoyer la demande <i class="fas fa-paper-plane"></i></button>
                 </form>
                 <p style="font-size: 0.7rem; margin-top: 12px; color:#888;">Réponse sous 24h – Management direct</p>
