@@ -1244,6 +1244,16 @@ section {
     flex-wrap: wrap;
 }
 
+.footer-bottom a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-bottom a:hover {
+    color: var(--gold);
+}
+
 .gold-dot {
     color: var(--gold);
 }
