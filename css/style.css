@@ -1378,10 +1378,21 @@ section {
     font-weight: 700;
 }
 
+.comp-card-info {
+    margin-top: 25px;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.comp-card-info strong {
+    color: var(--gold);
+}
+
 .comp-card-actions {
     display: flex;
     gap: 15px;
-    margin-top: 30px;
+    margin-top: 25px;
     border-top: 1px solid var(--border-subtle);
     padding-top: 20px;
 }
@@ -1439,30 +1450,176 @@ section {
     }
 }
 
-/* ===== PRINT STYLES (COMP CARD) ===== */
+/* ===== PRINT STYLES (COMP CARD - 1 SEULE PAGE GARANTIE) ===== */
+@page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+}
+
 @media print {
-    body * {
-        visibility: hidden;
+    /* 1. Élimination complète de tous les éléments du site (évite les pages blanches) */
+    html, body {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #111111 !important;
+        overflow: visible !important;
     }
-    .comp-card-modal,
-    .comp-card-modal * {
-        visibility: visible;
+
+    #navbar,
+    .navbar,
+    .hero,
+    .section,
+    .footer-luxe,
+    .luxe-menu-overlay,
+    #lightbox,
+    #toastNotice,
+    #goTop,
+    .btn-more {
+        display: none !important;
     }
+
+    /* 2. Affichage propre du conteneur Comp Card */
+    #compCardModal,
     .comp-card-modal {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        background: #fff !important;
-        color: #000 !important;
+        display: block !important;
+        position: static !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
     }
+
+    /* 3. Fiche technique Comp Card (sans barre de défilement, calibrée sur 1 page A4) */
     .comp-card-sheet {
-        box-shadow: none;
-        border: 2px solid #000;
-        background: #fff;
-        color: #000;
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+        border: 2px solid #b89728 !important;
+        border-radius: 8px !important;
+        background: #ffffff !important;
+        color: #111111 !important;
+        padding: 20px 24px !important;
+        margin: 0 auto !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
     }
-    .comp-card-actions, .comp-card-close {
+
+    .comp-card-header {
+        border-bottom: 2px solid #b89728 !important;
+        padding-bottom: 10px !important;
+        margin-bottom: 16px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+    }
+
+    .comp-card-header h3 {
+        font-family: 'Playfair Display', serif !important;
+        font-size: 2.2rem !important;
+        color: #b89728 !important;
+        margin: 0 0 2px 0 !important;
+        line-height: 1.1 !important;
+    }
+
+    .comp-card-header p {
+        color: #444444 !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.5px !important;
+        margin: 0 !important;
+    }
+
+    .comp-card-body {
+        display: grid !important;
+        grid-template-columns: 280px 1fr !important;
+        gap: 24px !important;
+        align-items: start !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .comp-card-photo {
+        text-align: center !important;
+    }
+
+    .comp-card-photo img {
+        width: 100% !important;
+        max-width: 280px !important;
+        max-height: 400px !important;
+        height: auto !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+        border: 1px solid #b89728 !important;
+        display: block !important;
+    }
+
+    .comp-card-specs {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    .comp-spec-box {
+        background: #f7f7f7 !important;
+        border: 1px solid #e2e2e2 !important;
+        padding: 7px 10px !important;
+        border-radius: 6px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .comp-spec-label {
+        font-size: 0.72rem !important;
+        color: #8c711a !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .comp-spec-val {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        color: #111111 !important;
+        margin-top: 1px !important;
+    }
+
+    .comp-card-info {
+        margin-top: 14px !important;
+        padding-top: 12px !important;
+        border-top: 1px solid #e8e8e8 !important;
+        line-height: 1.55 !important;
+        font-size: 0.88rem !important;
+        color: #222222 !important;
+    }
+
+    .comp-card-info p {
+        margin-bottom: 3px !important;
+    }
+
+    .comp-card-info strong {
+        color: #8c711a !important;
+    }
+
+    /* Masquer les boutons d'action lors de l'impression */
+    .comp-card-actions,
+    .comp-card-close {
         display: none !important;
     }
 }
